@@ -342,7 +342,7 @@
 
 - (void)removeAnnotation:(MKAnnotation)annotation
 {
-	[self removeAnnotation:[CPArray arrayWithObject:annotation]];
+	[self removeAnnotations:[CPArray arrayWithObject:annotation]];
 }
 
 - (void)removeAnnotations:(CPArray)aAnnotationArray
