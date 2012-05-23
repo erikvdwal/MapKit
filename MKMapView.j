@@ -330,8 +330,26 @@
 		{
 			var marker = new google.maps.Marker({
     			position: LatLngFromCLLocationCoordinate2D([annotation coordinate]),
-    			map: m_map
+                animation: [annotation animationType],
+    			map: m_map,
+                title: [annotation title]
 	  		});
+
+            if ([annotation canShowCallout])
+            {
+                if ([annotation title] || [annotation subtitle])
+                {
+                    var contentString = "<strong>" + [annotation title] + "</strong><br />" + [annotation subtitle];
+
+                    var infowindow = new google.maps.InfoWindow({
+                       content: contentString
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(m_map, marker);
+                    });
+                }
+            }
 
   			[markerDictionary setValue:marker forKey:[annotation UID]];
 		}
