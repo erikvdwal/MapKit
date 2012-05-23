@@ -368,6 +368,14 @@
 	};
 }
 
+- (void)updateCoordinate:(CLLocationCoordinate2D)coordinate forAnnotation:(MKAnnotation)annotation
+{
+    if (marker = [markerDictionary valueForKey:[annotation UID]])
+    {
+        marker.setPosition(LatLngFromCLLocationCoordinate2D(coordinate));
+    }
+}
+
 -(void)layoutSubviews
 {
 	google.maps.event.trigger(m_map, 'resize');
@@ -486,7 +494,7 @@ CPLogConsole(_cmd + opts + mapObject);
         js_options[key] = value;
         [options setObject:value forKey:key]; // Will send KVO notifications for each value
     }];
-    
+
     if (mapObject != null)
         mapObject.setOptions(js_options);
 }
